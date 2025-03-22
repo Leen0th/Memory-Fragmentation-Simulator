@@ -42,19 +42,37 @@ class Algorithms {
                 block.status = "allocated";
                 block.processID = processID;
 
-                // Call fragmentation calculation method
+            // Call fragmentation calculation method
                 calculateFragmentation(block, strategy, processSize);
 
                 System.out.printf("%s Allocated at address %d, and the internal fragmentation is %d\n",
                         processID, block.startAddress, block.internalFragmentation);
-                return true; // Allocation successful
+                return true; 
             }
         }
-        return false; // No suitable block found
+        return false; 
     }
-
-    // TODO: Implement Best-Fit Algorithm
-    // public static boolean bestFit(MemoryBlock[] memoryBlocks, String processID, int processSize, int strategy) { }
+ // Best-Fit Algorithm
+    public static boolean bestFit(MemoryBlock[] memoryBlocks, String processID, int processSize, int strategy) {
+        MemoryBlock bestBlock = null;
+        int minSize = Integer.MAX_VALUE;
+        for (MemoryBlock block : memoryBlocks) {
+            if (block.status.equals("free") && block.blockSize >= processSize && block.blockSize < minSize) {
+                bestBlock = block;
+                minSize = block.blockSize;
+            }
+        }
+        if (bestBlock != null) {
+            bestBlock.status = "allocated";
+            bestBlock.processID = processID;
+	 // Call fragmentation calculation method
+            calculateFragmentation(bestBlock, strategy, processSize);
+            System.out.printf("%s Allocated at address %d, and the internal fragmentation is %d\n",
+                    processID, bestBlock.startAddress, bestBlock.internalFragmentation);
+            return true;
+        }
+        return false;
+    }
 
     // TODO: Implement Worst-Fit Algorithm
     // public static boolean worstFit(MemoryBlock[] memoryBlocks, String processID, int processSize, int strategy) { }
@@ -69,6 +87,7 @@ class Algorithms {
         }
     }
 }
+
    import java.util.Scanner;
 
 public class MemoryInitializatio {
