@@ -15,6 +15,31 @@ This project simulates **memory fragmentation** using three memory allocation st
 
 ## Screenshots & Sample Outputs
 
+### **First-Fit Allocation**
+1. **First-fit allocates P1 (150 KB) to the first suitable block (Block0, 300 KB), leaving 150 KB of internal fragmentation.**  
+   ![Screenshot 1](Screenshots/FirstFitBasicAllocationWithFragmentation.png)
+
+2. **First-fit allocates P1 (250 KB) to Block0 and P2 (350 KB) to Block3, but fails to allocate P3 (250 KB) as the remaining blocks (200 KB, 100 KB) are too small.**
+   ![Screenshot 2](Screenshots/FirstFitAllocationFailureScenario.png)
+
+### **Best-Fit Allocation**
+3. **Best-fit allocates P1 (60 KB) to Block2 (100 KB) and P2 (150 KB) to Block1 (200 KB), choosing the smallest suitable blocks to reduce fragmentation.**  
+   ![Screenshot 3](Screenshots/BestFitOptimalBlockSelection.png)
+
+4. **Best-fit allocates P1 (350 KB) to Block3 (400 KB), the smallest block that fits, as no smaller blocks (300 KB, 200 KB, 100 KB) are sufficient.**  
+   ![Screenshot 4](Screenshots/BestFitTightFitWithNoSmallerBlockAvailable.png)
+
+### **Worst-Fit Allocation**
+5. **Worst-fit allocates P1 (150 KB) to Block3 (400 KB), the largest available block, resulting in 250 KB of internal fragmentation.**  
+   ![Screenshot 5](Screenshots/WorstFitLargestBlockSelection.png)
+
+6. **Worst-fit allocates P1 (120 KB) to Block3 (400 KB) and P2 (180 KB) to Block0 (300 KB), leaving only smaller blocks (200 KB, 100 KB), which cannot accommodate P3 (250 KB).**
+   ![Screenshot 6](Screenshots/WorstFitFragmentationAfterMultipleAllocationsScenario.png)
+
+### **Memory Deallocation Example**
+7. **Best-fit allocates P1 (60 KB) and P2 (150 KB), then deallocates P1, freeing Block2 (100 KB) for future use.**  
+   ![Screenshot 7](Screenshots/DeallocationScenario.png)
+
 
 ---
 
